@@ -37,26 +37,25 @@ let menuItems = [
   // Step 6: add the menu component to the DOM.
   
 // creating a function that will create "li" items:
-function createMenu(navArray) {
+const createMenu = (navArray) => {
   //creating the elements:
-  const menu = document.createElement("div");
-  const menuList = document.createElement("ul");
+  const menu = document.createElement("div")
+  const menuList = document.createElement("ul")
 //adding the styles to the div:
   menu.classList.add("menu");
 //going through each menu list item and create "li" elements:
   navArray.forEach(item => {
-    let menuListItem = document.createElement("li");
-    menuListItem.textContent = item;
-    menuList.appendChild(menuListItem);
-  });
+    let menuListItem = document.createElement("li")
+    menuListItem.textContent = item
+    menuList.appendChild(menuListItem)
+  })
 //adding a click event listener that toggles on/off using 'menu--open' class: 
   menu.appendChild(menuList);
-  document.querySelector(".menu-button").addEventListener("click", function() {
-    // console.log("clicktest");
-    menu.classList.toggle("menu--open");
-  });
+  document.querySelector(".menu-button").addEventListener("click", event => menu.classList.toggle("menu--open"))
+  // console.log("clicktest");
+  
   // return the menu component:
   return menu;
 }
 //adding components to the DOM: 
-document.querySelector(".header").append(createMenu(menuItems));
+document.querySelector(".header").append(createMenu(menuItems))
