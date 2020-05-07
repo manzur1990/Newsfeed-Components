@@ -86,14 +86,16 @@ const data = [
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`,
   },
+
+  // Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
   {
-    title: "Professional Software Development in 2020",
+    title: "Game of Tech",
     date: "Jan 1st, 2020",
-    firstParagraph: `House Tarly of Horn Hill The battle of the redgrass field. The Dothraki do things in their own time, for their own reasons. The rains of castamere. House Tarly of Horn Hill `,
+    firstParagraph: `I would like a trial by combat. The rains of castamere. The bear and the maiden fair. It is rare to meet a Lannister who shares my enthusiasm for dead Lannisters. Fire and blood.`,
 
-    secondParagraph: `The Dothraki do things in their own time, for their own reasons. I would like a trial by combat. It's ten thousand miles between Kings landing and the wall. The Dothraki do things in their own time, for their own reasons. A forked purple lightning bolt, on black field speckled with four-pointed stars.`,
+    secondParagraph: `House Tarly of Horn Hill The battle of the redgrass field. The Dothraki do things in their own time, for their own reasons. The rains of castamere. House Tarly of Horn Hill `,
 
-    thirdParagraph: `I would like a trial by combat. The rains of castamere. The bear and the maiden fair. It is rare to meet a Lannister who shares my enthusiasm for dead Lannisters. Fire and blood.`,
+    thirdParagraph: `The Dothraki do things in their own time, for their own reasons. I would like a trial by combat. It's ten thousand miles between Kings landing and the wall. The Dothraki do things in their own time, for their own reasons. A forked purple lightning bolt, on black field speckled with four-pointed stars.`,
   },
 
 ];
@@ -124,7 +126,8 @@ const data = [
 
 */
 
-
+// Step 1: Create a function that creates a component.
+const open = '\u25bc'
 const articleBuilder = (
   title,
   date,
@@ -133,6 +136,16 @@ const articleBuilder = (
   thirdParagraph 
 ) => {
 
+{/* <div class="article">
+    <h2>{title of the article}</h2>
+    <p class="date">{date of the article}</p>
+
+    {three separate paragraph elements}
+
+    <span class='expandButton'></span>
+  </div> */}
+
+
   //Creating Elements
   const article = document.createElement('div')
   const articleTitle = document.createElement('h2')
@@ -140,7 +153,7 @@ const articleBuilder = (
   const firstP = document.createElement('p')
   const secondP = document.createElement('p')
   const thirdP = document.createElement('p')
-  const btnArticle = document.createElement('p')
+  const btn = document.createElement('p')
 
   // HTML Sturcture
   article.appendChild(articleTitle);
@@ -148,38 +161,56 @@ const articleBuilder = (
   article.appendChild(firstP);
   article.appendChild(secondP)
   article.appendChild(thirdP);
-  article.appendChild(btnArticle)
+  article.appendChild(btn)
 
   // Add Classes 
   article.classList.add('article')
   articleDate.classList.add('date')
-  btnArticle.classList.add('expandButton')
+  btn.classList.add('expandButton')
 
   // Add Content
+  
   articleTitle.textContent = title
   articleDate.textContent = date
   firstP.textContent = firstParagraph
   secondP.textContent = secondParagraph
   thirdP.textContent = thirdParagraph
-  btnArticle.textContent = 'View More'
+  btn.textContent = open
 
-  btnArticle.addEventListener('click', event => 
+  // Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+
+  btn.addEventListener('click', event => 
     article.classList.toggle('article-open'))
 
+// Step 3: return the entire component.
   return article;
 
 };
 
-// Map
+// Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+// const articleContent = document.querySelector('.articles')
+//   data.forEach(content => {
+//     articleContent.appendChild(
+//       articleBuilder(
+//         content.title,
+//         content.date,
+//         content.firstParagraph,
+//         content.secondParagraph,
+//         content.thirdParagraph
+//       )
+//     )
+//   })
+
+
 const articleContent = document.querySelector('.articles')
-  data.forEach(content => {
-    articleContent.appendChild(
-      articleBuilder(
-        content.title,
-        content.date,
-        content.firstParagraph,
-        content.secondParagraph,
-        content.thirdParagraph
-      )
-    )
-  })
+
+data.forEach(content =>{
+  articleContent.appendChild(
+    articleBuilder(
+      content.title,
+      content.date,
+      content.firstParagraph,
+      content.secondParagraph,
+      content.thirdParagraph
+  ))
+})
